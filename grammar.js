@@ -64,6 +64,7 @@ module.exports = grammar({
 
   rules: {
     translation_unit: $ =>
+    //program: $ =>
       seq(
         optional(repeat($.compiler_command)),
         optional(repeat($.function_declaration)),
