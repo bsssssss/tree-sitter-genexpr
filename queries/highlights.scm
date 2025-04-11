@@ -24,6 +24,7 @@
 (["if" "else"]) @keyword.conditional
 (["for" "while"]) @keyword.repeat
 
+("=") @operator
 (assignment_operator) @operator
 (binary_expression) @operator
 (string_literal) @string

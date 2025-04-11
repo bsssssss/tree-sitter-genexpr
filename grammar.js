@@ -142,7 +142,11 @@ module.exports = grammar({
         $.return_statement
       ),
 
-    _expression_statement: $ => seq(optional($._expression), ';'),
+    _expression_statement: $ =>
+      seq(
+        optional($._expression),
+        ';'
+      ),
 
     selection_statement: $ =>
       prec.right(
