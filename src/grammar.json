@@ -1108,8 +1108,17 @@
             "type": "FIELD",
             "name": "condition",
             "content": {
-              "type": "SYMBOL",
-              "name": "binary_expression"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "binary_expression"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                }
+              ]
             }
           },
           {

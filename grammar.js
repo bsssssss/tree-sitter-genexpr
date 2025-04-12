@@ -202,9 +202,7 @@ module.exports = grammar({
       choice($.continue_statement, $.break_statement, $.return_statement),
 
     continue_statement: _ => seq('continue', ';'),
-
     break_statement: _ => seq('break', ';'),
-
     return_statement: $ => seq('return', commaSep($._true_expression), ';'),
 
     // Expressions
@@ -276,7 +274,7 @@ module.exports = grammar({
       prec.right(
         'ternary',
         seq(
-          field('condition', $.binary_expression),
+          field('condition', choice($.binary_expression, $.identifier)),
           '?',
           optional(field('consequence', $._expression)),
           ':',
