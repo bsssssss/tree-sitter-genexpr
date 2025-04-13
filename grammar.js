@@ -163,6 +163,7 @@ module.exports = grammar({
 
     _expression_statement_content: $ => $._expression,
 
+    // Bit weird but seems to work
     _expression_statement: $ =>
       choice(
         choice(
@@ -210,6 +211,7 @@ module.exports = grammar({
         field('body', $.statement)
       ),
 
+    // Error here ?
     do_statement: $ =>
       seq(
         'do',
@@ -221,6 +223,7 @@ module.exports = grammar({
         ';'
       ),
 
+    // Error here ?
     for_statement: $ =>
       seq(
         'for',
@@ -237,9 +240,30 @@ module.exports = grammar({
     jump_statement: $ =>
       choice($.continue_statement, $.break_statement, $.return_statement),
 
-    continue_statement: _ => seq('continue', ';'),
-    break_statement: _ => seq('break', ';'),
-    return_statement: $ => seq('return', commaSep($._true_expression), ';'),
+    continue_statement: $ =>
+      choice(
+        seq('continue', ';'),
+        seq('continue', alias($._error_missing_semicolon, $.error_missing_semicolon))
+      ),
+
+    break_statement: $ =>
+      choice(
+        seq('break', ';'),
+        seq('break', alias($._error_missing_semicolon, $.error_missing_semicolon)),
+      ),
+
+    return_statement: $ =>
+      choice(
+        seq('return', commaSep($._true_expression), ';'),
+        seq('return', commaSep($._true_expression), alias($._error_missing_semicolon, $.error_missing_semicolon)),
+      ),
+
+    //jump_statement: $ =>
+    //  choice($.continue_statement, $.break_statement, $.return_statement),
+    //
+    //continue_statement: _ => seq('continue', ';'),
+    //break_statement: _ => seq('break', ';'),
+    //return_statement: $ => seq('return', commaSep($._true_expression), ';'),
 
     // Expressions
     _expression: $ => choice($._assignment_expression, $._true_expression),

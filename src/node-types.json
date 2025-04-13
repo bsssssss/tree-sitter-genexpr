@@ -253,7 +253,17 @@
   {
     "type": "break_statement",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "error_missing_semicolon",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "call_member_expression",
@@ -436,7 +446,17 @@
   {
     "type": "continue_statement",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "error_missing_semicolon",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "declaration",
@@ -1056,6 +1076,10 @@
         },
         {
           "type": "conditional_expression",
+          "named": true
+        },
+        {
+          "type": "error_missing_semicolon",
           "named": true
         },
         {
