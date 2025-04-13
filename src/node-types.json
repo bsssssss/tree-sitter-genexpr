@@ -259,16 +259,12 @@
     "type": "call_member_expression",
     "named": true,
     "fields": {
-      "arguments": {
+      "argument": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": ",",
-            "named": false
-          },
-          {
-            "type": "=",
             "named": false
           },
           {
@@ -285,6 +281,10 @@
           },
           {
             "type": "inlet_outlet",
+            "named": true
+          },
+          {
+            "type": "named_argument",
             "named": true
           },
           {
@@ -871,6 +871,64 @@
             "type": ",",
             "named": false
           },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inlet_outlet",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "postfix_expression",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "named_argument",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
           {
             "type": "binary_expression",
             "named": true

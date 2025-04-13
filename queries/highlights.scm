@@ -2,11 +2,14 @@
 
 ; Function parameters in function declarations
 (function_declaration_parameter
-  (identifier) @variable.parameter)
+  (identifier) @parameter)
 
 ; Function call arguments
 (call_member_expression
-  arguments: (identifier) @variable.argument)
+  argument: (identifier) @attribute)
+
+(named_argument
+  key: (identifier) @attribute)
 
 ; ((identifier) @constant
 ;  (#match? @constant "^[_a-zA-Z][_a-zA-Z0-9]*$"))

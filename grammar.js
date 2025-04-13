@@ -381,15 +381,24 @@ module.exports = grammar({
       seq(
         '(',
         field(
-          'arguments',
+          'argument',
           commaSep(
             choice(
               $._true_expression,
-              seq($.identifier, '=', $._true_expression)
+              //seq($.identifier, '=', $._true_expression)
+              // is in fact an attribute
+              $.named_argument
             )
           )
         ),
         ')'
+      ),
+
+    named_argument: $ =>
+      seq(
+        field('key', $.identifier),
+        '=',
+        field('value', $._true_expression)
       ),
 
     // call_expression_arguments: $ => $.arguments,
