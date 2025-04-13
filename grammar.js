@@ -64,7 +64,7 @@ module.exports = grammar({
 
   rules: {
     translation_unit: $ =>
-    //program: $ =>
+      //program: $ =>
       seq(
         optional(repeat($.compiler_command)),
         optional(repeat($.function_declaration)),
@@ -74,12 +74,16 @@ module.exports = grammar({
 
     // Main Grammar
 
-    compiler_command: $ =>
+    missing_semicolon_error: _ => prec(-1, seq()),
+
+    _compiler_command_content: $ =>
       seq(
         'require',
         choice(seq('(', $.string_literal, ')'), $.string_literal),
-        ';'
       ),
+
+    compiler_command: $ =>
+      withSemicolonError($._compiler_command_content, $.missing_semicolon_error),
 
     function_declaration: $ =>
       seq(
@@ -486,4 +490,14 @@ function commaSep(rule) {
  */
 function commaSep1(rule) {
   return seq(rule, repeat(seq(',', rule)));
+}
+
+/**
+  * Create a rule to return a missing_semicolon_error node if missing semicolon
+  */
+function withSemicolonError(ruleContent, errorType) {
+  return choice(
+    prec(1, seq(ruleContent, ';')),
+    prec.dynamic(-1, alias(ruleContent, errorType))
+  )
 }

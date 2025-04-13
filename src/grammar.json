@@ -58,7 +58,15 @@
         }
       ]
     },
-    "compiler_command": {
+    "missing_semicolon_error": {
+      "type": "PREC",
+      "value": -1,
+      "content": {
+        "type": "SEQ",
+        "members": []
+      }
+    },
+    "_compiler_command_content": {
       "type": "SEQ",
       "members": [
         {
@@ -90,10 +98,41 @@
               "name": "string_literal"
             }
           ]
+        }
+      ]
+    },
+    "compiler_command": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_compiler_command_content"
+              },
+              {
+                "type": "STRING",
+                "value": ";"
+              }
+            ]
+          }
         },
         {
-          "type": "STRING",
-          "value": ";"
+          "type": "PREC_DYNAMIC",
+          "value": -1,
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_compiler_command_content"
+            },
+            "named": true,
+            "value": "missing_semicolon_error"
+          }
         }
       ]
     },
