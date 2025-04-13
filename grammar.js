@@ -74,16 +74,23 @@ module.exports = grammar({
 
     // Main Grammar
 
-    missing_semicolon_error: _ => prec(-1, seq()),
+    _error_missing_semicolon: _ => token.immediate(prec(-1, '')),
+    error_missing_semicolon: _ => prec(-1, seq()),
 
-    _compiler_command_content: $ =>
+    _compiler_command: $ =>
       seq(
         'require',
         choice(seq('(', $.string_literal, ')'), $.string_literal),
       ),
 
     compiler_command: $ =>
-      withSemicolonError($._compiler_command_content, $.missing_semicolon_error),
+      choice(
+        seq( $._compiler_command, ';'),
+        seq(
+          $._compiler_command,
+          alias($._error_missing_semicolon, $.error_missing_semicolon)
+        )
+      ),
 
     function_declaration: $ =>
       seq(
@@ -107,26 +114,24 @@ module.exports = grammar({
         choice($.identifier, $.inlet_outlet)
       ),
 
-    declaration: $ =>
-      prec.left(
+    _declaration: $ =>
         seq(
           $.type_specifier,
           commaSep1(seq($.identifier, optional($.call_member_expression))),
+        ),
+
+    declaration: $ =>
+      choice(
+        seq(
+          $._declaration,
           ';'
+        ),
+        seq(
+          $._declaration,
+          alias($._error_missing_semicolon, $.error_missing_semicolon)
         )
       ),
 
-    // Not working (breaks the tree if comma in the declaration)
-    //declaration: $ =>
-    //  prec.left(
-    //    withSemicolonError(
-    //      seq(
-    //        $.type_specifier,
-    //        commaSep1(seq($.identifier, optional($.call_member_expression)))
-    //      ),
-    //      $.missing_semicolon_error
-    //    )
-    //  ),
 
     // Statements
 
@@ -502,14 +507,4 @@ function commaSep(rule) {
  */
 function commaSep1(rule) {
   return seq(rule, repeat(seq(',', rule)));
-}
-
-/**
-  * Create a rule to return a missing_semicolon_error node if missing semicolon
-  */
-function withSemicolonError(ruleContent, errorType) {
-  return choice(
-    prec(1, seq(ruleContent, ';')),
-    prec.dynamic(-2, alias(ruleContent, errorType))
-  )
 }
