@@ -116,6 +116,18 @@ module.exports = grammar({
         )
       ),
 
+    // Not working (breaks the tree if comma in the declaration)
+    //declaration: $ =>
+    //  prec.left(
+    //    withSemicolonError(
+    //      seq(
+    //        $.type_specifier,
+    //        commaSep1(seq($.identifier, optional($.call_member_expression)))
+    //      ),
+    //      $.missing_semicolon_error
+    //    )
+    //  ),
+
     // Statements
 
     statement: $ => choice($.compound_statement, $._simple_statement),
@@ -498,6 +510,6 @@ function commaSep1(rule) {
 function withSemicolonError(ruleContent, errorType) {
   return choice(
     prec(1, seq(ruleContent, ';')),
-    prec.dynamic(-1, alias(ruleContent, errorType))
+    prec.dynamic(-2, alias(ruleContent, errorType))
   )
 }
