@@ -5,8 +5,8 @@
   (identifier) @parameter)
 
 ; Function call arguments
-(call_member_expression
-  argument: (identifier) @attribute)
+;(call_member_expression
+;  (identifier) @attribute)
 
 (named_argument
   key: (identifier) @attribute)
