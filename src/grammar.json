@@ -1094,6 +1094,10 @@
           {
             "type": "SYMBOL",
             "name": "parenthesized_expression"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_literal"
           }
         ]
       }
@@ -2505,28 +2509,23 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "param",
-              "flags": "i"
+              "value": "Param"
             },
             {
               "type": "PATTERN",
-              "value": "history",
-              "flags": "i"
+              "value": "History"
             },
             {
               "type": "PATTERN",
-              "value": "buffer",
-              "flags": "i"
+              "value": "Buffer"
             },
             {
               "type": "PATTERN",
-              "value": "data",
-              "flags": "i"
+              "value": "Data"
             },
             {
               "type": "PATTERN",
-              "value": "delay",
-              "flags": "i"
+              "value": "Delay"
             }
           ]
         }

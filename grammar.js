@@ -266,7 +266,8 @@ module.exports = grammar({
           $.unary_expression,
           $.postfix_expression,
           $._primary_expression,
-          $.parenthesized_expression
+          $.parenthesized_expression,
+          //$._literal
         )
       ),
 
@@ -404,7 +405,8 @@ module.exports = grammar({
     type_specifier: _ =>
       prec(
         2,
-        token(choice(/param/i, /history/i, /buffer/i, /data/i, /delay/i))
+        // Modified this to be case sensitive
+        token(choice(/Param/, /History/, /Buffer/, /Data/, /Delay/))
       ),
 
     inlet_outlet: _ => prec(2, token(seq('', /(in|out)[0-9]+/i))),
