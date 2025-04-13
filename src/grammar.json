@@ -492,18 +492,46 @@
         }
       ]
     },
+    "_expression_statement_content": {
+      "type": "SYMBOL",
+      "name": "_expression"
+    },
     "_expression_statement": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "_expression"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_expression_statement_content"
+                },
+                {
+                  "type": "STRING",
+                  "value": ";"
+                }
+              ]
             },
             {
-              "type": "BLANK"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_expression_statement_content"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_error_missing_semicolon"
+                  },
+                  "named": true,
+                  "value": "error_missing_semicolon"
+                }
+              ]
             }
           ]
         },

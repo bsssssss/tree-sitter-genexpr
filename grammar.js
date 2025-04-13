@@ -85,7 +85,7 @@ module.exports = grammar({
 
     compiler_command: $ =>
       choice(
-        seq( $._compiler_command, ';'),
+        seq($._compiler_command, ';'),
         seq(
           $._compiler_command,
           alias($._error_missing_semicolon, $.error_missing_semicolon)
@@ -114,18 +114,16 @@ module.exports = grammar({
         choice($.identifier, $.inlet_outlet)
       ),
 
+    // Not using prec.left() here ?
     _declaration: $ =>
-        seq(
-          $.type_specifier,
-          commaSep1(seq($.identifier, optional($.call_member_expression))),
-        ),
+      seq(
+        $.type_specifier,
+        commaSep1(seq($.identifier, optional($.call_member_expression))),
+      ),
 
     declaration: $ =>
       choice(
-        seq(
-          $._declaration,
-          ';'
-        ),
+        seq($._declaration, ';'),
         seq(
           $._declaration,
           alias($._error_missing_semicolon, $.error_missing_semicolon)
@@ -163,11 +161,28 @@ module.exports = grammar({
         $.return_statement
       ),
 
+    _expression_statement_content: $ => $._expression,
+
     _expression_statement: $ =>
-      seq(
-        optional($._expression),
+      choice(
+        choice(
+          seq(
+            $._expression_statement_content,
+            ';'
+          ),
+          seq(
+            $._expression_statement_content,
+            alias($._error_missing_semicolon, $.error_missing_semicolon)
+          )
+        ),
         ';'
       ),
+
+    //_expression_statement: $ =>
+    //  seq(
+    //    optional($._expression),
+    //    ';'
+    //  ),
 
     selection_statement: $ =>
       prec.right(

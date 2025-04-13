@@ -523,6 +523,10 @@
           "named": true
         },
         {
+          "type": "error_missing_semicolon",
+          "named": true
+        },
+        {
           "type": "iteration_statement",
           "named": true
         },
@@ -1214,7 +1218,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
@@ -1223,6 +1227,10 @@
         },
         {
           "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "error_missing_semicolon",
           "named": true
         },
         {
