@@ -33,7 +33,7 @@
 (string_literal) @string
 (number_literal) @number
 (type_specifier) @keyword.type
-(inlet_outlet) @constant.builtin
+(inlet_outlet) @keyword
 
 (postfix_expression
   object: (identifier) @function)
