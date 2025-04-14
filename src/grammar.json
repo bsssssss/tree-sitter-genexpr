@@ -205,22 +205,22 @@
           "value": ")"
         },
         {
-          "type": "FIELD",
-          "name": "body",
-          "content": {
-            "type": "SYMBOL",
-            "name": "function_declaration_body"
-          }
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_declaration_body"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
         }
       ]
     },
     "function_declaration_body": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "STRING",
-          "value": "{"
-        },
         {
           "type": "CHOICE",
           "members": [
@@ -244,10 +244,6 @@
         {
           "type": "SYMBOL",
           "name": "expr_statement_list"
-        },
-        {
-          "type": "STRING",
-          "value": "}"
         }
       ]
     },
@@ -403,7 +399,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "compound_statement"
+          "name": "_compound_statement"
         },
         {
           "type": "SYMBOL",
@@ -420,7 +416,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_expression_statement"
+          "name": "expression_statement"
         },
         {
           "type": "SYMBOL",
@@ -432,7 +428,7 @@
         }
       ]
     },
-    "compound_statement": {
+    "_compound_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -462,11 +458,11 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "compound_statement"
+                    "name": "_compound_statement"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_expression_statement"
+                    "name": "expression_statement"
                   },
                   {
                     "type": "SYMBOL",
@@ -503,7 +499,7 @@
       "type": "SYMBOL",
       "name": "_expression"
     },
-    "_expression_statement": {
+    "expression_statement": {
       "type": "CHOICE",
       "members": [
         {
