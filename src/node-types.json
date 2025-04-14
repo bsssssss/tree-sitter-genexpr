@@ -341,6 +341,37 @@
     }
   },
   {
+    "type": "compound_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "iteration_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "selection_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "computed_member_expression",
     "named": true,
     "fields": {
@@ -479,7 +510,23 @@
         "required": true,
         "types": [
           {
-            "type": "statement",
+            "type": "compound_statement",
+            "named": true
+          },
+          {
+            "type": "expression_statement",
+            "named": true
+          },
+          {
+            "type": "iteration_statement",
+            "named": true
+          },
+          {
+            "type": "jump_statement",
+            "named": true
+          },
+          {
+            "type": "selection_statement",
             "named": true
           }
         ]
@@ -515,22 +562,7 @@
       "required": true,
       "types": [
         {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "expr_statement_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "expr_statement_list",
+          "type": "compound_statement",
           "named": true
         },
         {
@@ -580,7 +612,23 @@
         "required": true,
         "types": [
           {
-            "type": "statement",
+            "type": "compound_statement",
+            "named": true
+          },
+          {
+            "type": "expression_statement",
+            "named": true
+          },
+          {
+            "type": "iteration_statement",
+            "named": true
+          },
+          {
+            "type": "jump_statement",
+            "named": true
+          },
+          {
+            "type": "selection_statement",
             "named": true
           }
         ]
@@ -640,28 +688,18 @@
             "named": true
           }
         ]
-      },
-      "parameters": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "function_declaration_parameter",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "function_declaration_body",
+          "named": true
+        },
+        {
+          "type": "function_declaration_parameter",
           "named": true
         }
       ]
@@ -676,11 +714,27 @@
       "required": true,
       "types": [
         {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
           "type": "declaration",
           "named": true
         },
         {
-          "type": "expr_statement_list",
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "iteration_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "selection_statement",
           "named": true
         }
       ]
@@ -747,10 +801,6 @@
       "multiple": false,
       "required": false,
       "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
         {
           "type": "inlet_outlet",
           "named": true
@@ -1169,7 +1219,23 @@
         "required": true,
         "types": [
           {
-            "type": "statement",
+            "type": "compound_statement",
+            "named": true
+          },
+          {
+            "type": "expression_statement",
+            "named": true
+          },
+          {
+            "type": "iteration_statement",
+            "named": true
+          },
+          {
+            "type": "jump_statement",
+            "named": true
+          },
+          {
+            "type": "selection_statement",
             "named": true
           }
         ]
@@ -1265,37 +1331,6 @@
     }
   },
   {
-    "type": "statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "expr_statement_list",
-          "named": true
-        },
-        {
-          "type": "expression_statement",
-          "named": true
-        },
-        {
-          "type": "iteration_statement",
-          "named": true
-        },
-        {
-          "type": "jump_statement",
-          "named": true
-        },
-        {
-          "type": "selection_statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "string_literal",
     "named": true,
     "fields": {},
@@ -1323,7 +1358,15 @@
           "named": true
         },
         {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
           "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
           "named": true
         },
         {
@@ -1331,7 +1374,15 @@
           "named": true
         },
         {
-          "type": "statement",
+          "type": "iteration_statement",
+          "named": true
+        },
+        {
+          "type": "jump_statement",
+          "named": true
+        },
+        {
+          "type": "selection_statement",
           "named": true
         }
       ]
@@ -1409,7 +1460,23 @@
         "required": true,
         "types": [
           {
-            "type": "statement",
+            "type": "compound_statement",
+            "named": true
+          },
+          {
+            "type": "expression_statement",
+            "named": true
+          },
+          {
+            "type": "iteration_statement",
+            "named": true
+          },
+          {
+            "type": "jump_statement",
+            "named": true
+          },
+          {
+            "type": "selection_statement",
             "named": true
           }
         ]

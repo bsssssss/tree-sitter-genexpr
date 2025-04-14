@@ -69,7 +69,7 @@ module.exports = grammar({
         optional(repeat($.compiler_command)),
         optional(repeat($.function_declaration)),
         optional(repeat($.declaration)),
-        repeat($.statement)
+        repeat($._statement)
       ),
 
     // Main Grammar
@@ -95,14 +95,16 @@ module.exports = grammar({
     function_declaration: $ =>
       seq(
         field('name', $.identifier),
-        '(', field('parameters', commaSep($.function_declaration_parameter)), ')',
-        '{', $.function_declaration_body, '}'
+        '(', commaSep($.function_declaration_parameter), ')',
+        $.function_declaration_body
       ),
 
     function_declaration_body: $ =>
       seq(
+        '{',
         optional(repeat(seq($.declaration))),
-        $.expr_statement_list,
+        $._expr_statement_list,
+        '}',
       ),
 
 
@@ -113,7 +115,7 @@ module.exports = grammar({
           '=',
           field('value', $._true_expression)
         ),
-        choice($.identifier, $.inlet_outlet)
+        choice(field('value', $.identifier), $.inlet_outlet)
       ),
 
     // Not using prec.left() here ?
@@ -133,7 +135,7 @@ module.exports = grammar({
     // Statements
 
     //statement: $ => choice($.compound_statement, $._simple_statement),
-    statement: $ => choice($._compound_statement, $._simple_statement),
+    _statement: $ => choice($.compound_statement, $._simple_statement),
 
     _simple_statement: $ =>
       choice(
@@ -143,15 +145,14 @@ module.exports = grammar({
         $.iteration_statement
       ),
 
-    //compound_statement: $ => seq('{', $.expr_statement_list, '}'),
-    _compound_statement: $ => seq('{', $.expr_statement_list, '}'),
+    compound_statement: $ => seq('{', $._expr_statement_list, '}'),
 
-    expr_statement_list: $ =>
+    _expr_statement_list: $ =>
       choice(
         seq(
           repeat1(
             choice(
-              $._compound_statement,
+              $.compound_statement,
               $.expression_statement,
               $.selection_statement,
               $.iteration_statement
@@ -168,8 +169,8 @@ module.exports = grammar({
     expression_statement: $ =>
       choice(
         choice(
-          seq( $._expression_statement_content, ';'),
-          seq( $._expression_statement_content, alias($._error_missing_semicolon, $.error_missing_semicolon))
+          seq($._expression_statement_content, ';'),
+          seq($._expression_statement_content, alias($._error_missing_semicolon, $.error_missing_semicolon))
         ),
         ';'
       ),
@@ -181,12 +182,12 @@ module.exports = grammar({
           '(',
           field('condition', $._expression),
           ')',
-          field('consequence', $.statement),
+          field('consequence', $._statement),
           optional(field('alternative', $.else_clause))
         )
       ),
 
-    else_clause: $ => seq('else', $.statement),
+    else_clause: $ => seq('else', $._statement),
 
     iteration_statement: $ =>
       choice($.while_statement, $.do_statement, $.for_statement),
@@ -197,13 +198,13 @@ module.exports = grammar({
         '(',
         field('condition', $._expression),
         ')',
-        field('body', $.statement)
+        field('body', $._statement)
       ),
 
     _do_statement: $ =>
       seq(
         'do',
-        field('body', $.statement),
+        field('body', $._statement),
         'while',
         '(',
         field('condition', $._expression),
@@ -226,7 +227,7 @@ module.exports = grammar({
         choice(';', alias($._error_missing_semicolon, $.error_missing_semicolon)),
         field('update', optional($._expression)),
         ')',
-        field('body', $.statement)
+        field('body', $._statement)
       ),
 
     jump_statement: $ =>
