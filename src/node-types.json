@@ -509,6 +509,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "error_missing_semicolon",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -605,6 +615,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "error_missing_semicolon",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -612,24 +632,12 @@
     "named": true,
     "fields": {
       "body": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "declaration",
+            "type": "function_declaration_body",
             "named": true
-          },
-          {
-            "type": "expr_statement_list",
-            "named": true
-          },
-          {
-            "type": "{",
-            "named": false
-          },
-          {
-            "type": "}",
-            "named": false
           }
         ]
       },
@@ -657,6 +665,25 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "function_declaration_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "expr_statement_list",
+          "named": true
+        }
+      ]
     }
   },
   {

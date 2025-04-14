@@ -208,39 +208,46 @@
           "type": "FIELD",
           "name": "body",
           "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "{"
-              },
-              {
-                "type": "CHOICE",
+            "type": "SYMBOL",
+            "name": "function_declaration_body"
+          }
+        }
+      ]
+    },
+    "function_declaration_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
                 "members": [
                   {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "declaration"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "BLANK"
+                    "type": "SYMBOL",
+                    "name": "declaration"
                   }
                 ]
-              },
-              {
-                "type": "SYMBOL",
-                "name": "expr_statement_list"
-              },
-              {
-                "type": "STRING",
-                "value": "}"
               }
-            ]
-          }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expr_statement_list"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
         }
       ]
     },
@@ -657,7 +664,7 @@
         }
       ]
     },
-    "do_statement": {
+    "_do_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -691,10 +698,42 @@
         {
           "type": "STRING",
           "value": ")"
+        }
+      ]
+    },
+    "do_statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_do_statement"
+            },
+            {
+              "type": "STRING",
+              "value": ";"
+            }
+          ]
         },
         {
-          "type": "STRING",
-          "value": ";"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_do_statement"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_error_missing_semicolon"
+              },
+              "named": true,
+              "value": "error_missing_semicolon"
+            }
+          ]
         }
       ]
     },
@@ -718,8 +757,22 @@
           }
         },
         {
-          "type": "STRING",
-          "value": ";"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ";"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_error_missing_semicolon"
+              },
+              "named": true,
+              "value": "error_missing_semicolon"
+            }
+          ]
         },
         {
           "type": "FIELD",
@@ -730,8 +783,22 @@
           }
         },
         {
-          "type": "STRING",
-          "value": ";"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ";"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_error_missing_semicolon"
+              },
+              "named": true,
+              "value": "error_missing_semicolon"
+            }
+          ]
         },
         {
           "type": "FIELD",

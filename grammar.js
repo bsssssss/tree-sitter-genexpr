@@ -92,6 +92,21 @@ module.exports = grammar({
         )
       ),
 
+
+    //function_declaration: $ =>
+    //  seq(
+    //    field('name', $.identifier),
+    //    '(',
+    //    field('parameters', commaSep($.function_declaration_parameter)),
+    //    ')',
+    //    field(
+    //      'body',
+    //      // Modified to allow repeated declarations
+    //      seq('{', optional(repeat(seq($.declaration))), $.expr_statement_list, '}')
+    //    )
+    //  ),
+
+
     function_declaration: $ =>
       seq(
         field('name', $.identifier),
@@ -99,10 +114,18 @@ module.exports = grammar({
         field('parameters', commaSep($.function_declaration_parameter)),
         ')',
         field(
-          'body',
-          seq('{', optional(seq($.declaration)), $.expr_statement_list, '}')
+          'body', $.function_declaration_body
         )
       ),
+
+    function_declaration_body: $ =>
+      seq(
+        '{',
+        optional(repeat(seq($.declaration))),
+        $.expr_statement_list,
+        '}'
+      ),
+
 
     function_declaration_parameter: $ =>
       choice(
@@ -211,8 +234,7 @@ module.exports = grammar({
         field('body', $.statement)
       ),
 
-    // Error here ?
-    do_statement: $ =>
+    _do_statement: $ =>
       seq(
         'do',
         field('body', $.statement),
@@ -220,18 +242,33 @@ module.exports = grammar({
         '(',
         field('condition', $._expression),
         ')',
-        ';'
       ),
 
-    // Error here ?
+    do_statement: $ =>
+      choice(
+        seq($._do_statement, ';'),
+        seq($._do_statement, alias($._error_missing_semicolon, $.error_missing_semicolon)),
+      ),
+
+    //do_statement: $ =>
+    //  seq(
+    //    'do',
+    //    field('body', $.statement),
+    //    'while',
+    //    '(',
+    //    field('condition', $._expression),
+    //    ')',
+    //    ';'
+    //  ),
+
     for_statement: $ =>
       seq(
         'for',
         '(',
         field('initializer', $.multi_declaration_expression),
-        ';',
+        choice(';', alias($._error_missing_semicolon, $.error_missing_semicolon)),
         field('condition', $._expression),
-        ';',
+        choice(';', alias($._error_missing_semicolon, $.error_missing_semicolon)),
         field('update', optional($._expression)),
         ')',
         field('body', $.statement)
