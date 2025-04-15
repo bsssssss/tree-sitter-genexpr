@@ -24,7 +24,7 @@ module.exports = grammar({
       $.declaration,
       // 'call',
       $.jump_statement,
-      $.function_declaration_parameter,
+      $._function_declaration_parameter,
       $._primary_expression,
       $.postfix_expression,
       $.unary_expression,
@@ -69,7 +69,7 @@ module.exports = grammar({
         optional(repeat($.compiler_command)),
         optional(repeat($.function_declaration)),
         optional(repeat($.declaration)),
-        repeat($._statement)
+        repeat($.statement)
       ),
 
     // Main Grammar
@@ -92,31 +92,38 @@ module.exports = grammar({
         )
       ),
 
+    // TODO: remove inlet_outlet rules for functions declarations
+
     function_declaration: $ =>
       seq(
         field('name', $.identifier),
-        '(', commaSep($.function_declaration_parameter), ')',
-        $.function_declaration_body
+        '(',
+        commaSep($._function_declaration_parameter),
+        ')',
+        '{',
+        field('body', $.function_declaration_body),
+        '}'
       ),
+
+    _function_declaration_parameter: $ =>
+        field('parameter', choice($.identifier, $.inlet_outlet)),
 
     function_declaration_body: $ =>
       seq(
-        '{',
         optional(repeat(seq($.declaration))),
         $._expr_statement_list,
-        '}',
       ),
 
-
-    function_declaration_parameter: $ =>
-      choice(
-        seq(
-          field('key', $.identifier),
-          '=',
-          field('value', $._true_expression)
-        ),
-        choice(field('value', $.identifier), $.inlet_outlet)
-      ),
+    // Can we declare expressions in parameters ?? (test says no)
+    //_function_declaration_parameter: $ =>
+    //  choice(
+    //    seq(
+    //      field('key', $.identifier),
+    //      '=',
+    //      field('value', $._true_expression)
+    //    ),
+    //    choice(field('value', $.identifier), $.inlet_outlet)
+    //  ),
 
     // Not using prec.left() here ?
     _declaration: $ =>
@@ -135,7 +142,7 @@ module.exports = grammar({
     // Statements
 
     //statement: $ => choice($.compound_statement, $._simple_statement),
-    _statement: $ => choice($.compound_statement, $._simple_statement),
+    statement: $ => field('statement', choice($.compound_statement, $._simple_statement)),
 
     _simple_statement: $ =>
       choice(
@@ -182,12 +189,12 @@ module.exports = grammar({
           '(',
           field('condition', $._expression),
           ')',
-          field('consequence', $._statement),
+          field('consequence', $.statement),
           optional(field('alternative', $.else_clause))
         )
       ),
 
-    else_clause: $ => seq('else', $._statement),
+    else_clause: $ => seq('else', $.statement),
 
     iteration_statement: $ =>
       choice($.while_statement, $.do_statement, $.for_statement),
@@ -198,13 +205,13 @@ module.exports = grammar({
         '(',
         field('condition', $._expression),
         ')',
-        field('body', $._statement)
+        field('body', $.statement)
       ),
 
     _do_statement: $ =>
       seq(
         'do',
-        field('body', $._statement),
+        field('body', $.statement),
         'while',
         '(',
         field('condition', $._expression),
@@ -227,7 +234,7 @@ module.exports = grammar({
         choice(';', alias($._error_missing_semicolon, $.error_missing_semicolon)),
         field('update', optional($._expression)),
         ')',
-        field('body', $._statement)
+        field('body', $.statement)
       ),
 
     jump_statement: $ =>

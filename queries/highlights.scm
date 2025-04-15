@@ -1,8 +1,8 @@
 (identifier) @variable
 
 ; Function parameters in function declarations
-(function_declaration_parameter
-  (identifier) @parameter)
+(function_declaration
+   parameter: (identifier) @parameter)
 
 ; Function call arguments
 ;(call_member_expression
