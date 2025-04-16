@@ -53,7 +53,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "statement"
+            "name": "_statement"
           }
         }
       ]
@@ -259,8 +259,12 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_expr_statement_list"
+          "type": "FIELD",
+          "name": "statements",
+          "content": {
+            "type": "SYMBOL",
+            "name": "expr_statement_list"
+          }
         }
       ]
     },
@@ -368,22 +372,18 @@
         }
       ]
     },
-    "statement": {
-      "type": "FIELD",
-      "name": "statement",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "compound_statement"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_simple_statement"
-          }
-        ]
-      }
+    "_statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "compound_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_simple_statement"
+        }
+      ]
     },
     "_simple_statement": {
       "type": "CHOICE",
@@ -415,7 +415,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_expr_statement_list"
+          "name": "expr_statement_list"
         },
         {
           "type": "STRING",
@@ -423,7 +423,7 @@
         }
       ]
     },
-    "_expr_statement_list": {
+    "expr_statement_list": {
       "type": "CHOICE",
       "members": [
         {
@@ -476,6 +476,10 @@
     "_expression_statement_content": {
       "type": "SYMBOL",
       "name": "_expression"
+    },
+    "_semicolon": {
+      "type": "STRING",
+      "value": ";"
     },
     "expression_statement": {
       "type": "CHOICE",
@@ -553,7 +557,7 @@
             "name": "consequence",
             "content": {
               "type": "SYMBOL",
-              "name": "statement"
+              "name": "_statement"
             }
           },
           {
@@ -584,7 +588,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "statement"
+          "name": "_statement"
         }
       ]
     },
@@ -633,7 +637,7 @@
           "name": "body",
           "content": {
             "type": "SYMBOL",
-            "name": "statement"
+            "name": "_statement"
           }
         }
       ]
@@ -650,7 +654,7 @@
           "name": "body",
           "content": {
             "type": "SYMBOL",
-            "name": "statement"
+            "name": "_statement"
           }
         },
         {
@@ -799,7 +803,7 @@
           "name": "body",
           "content": {
             "type": "SYMBOL",
-            "name": "statement"
+            "name": "_statement"
           }
         }
       ]
