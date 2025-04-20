@@ -341,21 +341,6 @@
     }
   },
   {
-    "type": "compound_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "expr_statement_list",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "computed_member_expression",
     "named": true,
     "fields": {
@@ -490,11 +475,11 @@
     "named": true,
     "fields": {
       "body": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "compound_statement",
+            "type": "expr_statement_list",
             "named": true
           },
           {
@@ -512,6 +497,14 @@
           {
             "type": "selection_statement",
             "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
           }
         ]
       },
@@ -538,37 +531,6 @@
     }
   },
   {
-    "type": "else_clause",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "compound_statement",
-          "named": true
-        },
-        {
-          "type": "expression_statement",
-          "named": true
-        },
-        {
-          "type": "iteration_statement",
-          "named": true
-        },
-        {
-          "type": "jump_statement",
-          "named": true
-        },
-        {
-          "type": "selection_statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "expr_statement_list",
     "named": true,
     "fields": {},
@@ -577,7 +539,7 @@
       "required": true,
       "types": [
         {
-          "type": "compound_statement",
+          "type": "expr_statement_list",
           "named": true
         },
         {
@@ -623,11 +585,11 @@
     "named": true,
     "fields": {
       "body": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "compound_statement",
+            "type": "expr_statement_list",
             "named": true
           },
           {
@@ -645,6 +607,14 @@
           {
             "type": "selection_statement",
             "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
           }
         ]
       },
@@ -1143,31 +1113,15 @@
     "named": true,
     "fields": {
       "alternative": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "else_clause",
-            "named": true
-          }
-        ]
-      },
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
+            "type": "else",
+            "named": false
+          },
           {
-            "type": "_expression",
-            "named": true
-          }
-        ]
-      },
-      "consequence": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "compound_statement",
+            "type": "expr_statement_list",
             "named": true
           },
           {
@@ -1185,6 +1139,58 @@
           {
             "type": "selection_statement",
             "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
+          }
+        ]
+      },
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      },
+      "consequence": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "expr_statement_list",
+            "named": true
+          },
+          {
+            "type": "expression_statement",
+            "named": true
+          },
+          {
+            "type": "iteration_statement",
+            "named": true
+          },
+          {
+            "type": "jump_statement",
+            "named": true
+          },
+          {
+            "type": "selection_statement",
+            "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
           }
         ]
       }
@@ -1306,11 +1312,11 @@
           "named": true
         },
         {
-          "type": "compound_statement",
+          "type": "declaration",
           "named": true
         },
         {
-          "type": "declaration",
+          "type": "expr_statement_list",
           "named": true
         },
         {
@@ -1404,11 +1410,11 @@
     "named": true,
     "fields": {
       "body": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "compound_statement",
+            "type": "expr_statement_list",
             "named": true
           },
           {
@@ -1426,6 +1432,14 @@
           {
             "type": "selection_statement",
             "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
           }
         ]
       },

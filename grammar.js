@@ -141,7 +141,7 @@ module.exports = grammar({
 
     // Statements
 
-    _statement: $ => choice($.compound_statement, $._simple_statement),
+    _statement: $ => choice($._compound_statement, $._simple_statement),
     //_statement: $ => field('statement', choice($.compound_statement, $._simple_statement)),
 
     _simple_statement: $ =>
@@ -152,14 +152,14 @@ module.exports = grammar({
         $.iteration_statement
       ),
 
-    compound_statement: $ => seq('{', $.expr_statement_list, '}'),
+    _compound_statement: $ => seq('{', $.expr_statement_list, '}'),
 
     expr_statement_list: $ =>
       choice(
         seq(
           repeat1(
             choice(
-              $.compound_statement,
+              $._compound_statement,
               $.expression_statement,
               $.selection_statement,
               $.iteration_statement
@@ -210,11 +210,11 @@ module.exports = grammar({
           field('condition', $._expression),
           ')',
           field('consequence', $._statement),
-          optional(field('alternative', $.else_clause))
+          optional(field('alternative', $._else_clause))
         )
       ),
 
-    else_clause: $ => seq('else', $._statement),
+    _else_clause: $ => seq('else', $._statement),
 
     iteration_statement: $ =>
       choice($.while_statement, $.do_statement, $.for_statement),

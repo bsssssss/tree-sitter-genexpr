@@ -377,7 +377,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "compound_statement"
+          "name": "_compound_statement"
         },
         {
           "type": "SYMBOL",
@@ -406,7 +406,7 @@
         }
       ]
     },
-    "compound_statement": {
+    "_compound_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -436,7 +436,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "compound_statement"
+                    "name": "_compound_statement"
                   },
                   {
                     "type": "SYMBOL",
@@ -568,7 +568,7 @@
                 "name": "alternative",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "else_clause"
+                  "name": "_else_clause"
                 }
               },
               {
@@ -579,7 +579,7 @@
         ]
       }
     },
-    "else_clause": {
+    "_else_clause": {
       "type": "SEQ",
       "members": [
         {
