@@ -218,23 +218,6 @@
         }
       ]
     },
-    "_function_declaration_parameter": {
-      "type": "FIELD",
-      "name": "parameter",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "identifier"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "inlet_outlet"
-          }
-        ]
-      }
-    },
     "function_declaration_body": {
       "type": "SEQ",
       "members": [
@@ -265,6 +248,53 @@
             "type": "SYMBOL",
             "name": "expr_statement_list"
           }
+        }
+      ]
+    },
+    "_function_declaration_parameter": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "parameter",
+              "content": {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
+            },
+            {
+              "type": "STRING",
+              "value": "="
+            },
+            {
+              "type": "FIELD",
+              "name": "value",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_true_expression"
+              }
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "parameter",
+              "content": {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
+            },
+            {
+              "type": "SYMBOL",
+              "name": "inlet_outlet"
+            }
+          ]
         }
       ]
     },
@@ -476,10 +506,6 @@
     "_expression_statement_content": {
       "type": "SYMBOL",
       "name": "_expression"
-    },
-    "_semicolon": {
-      "type": "STRING",
-      "value": ";"
     },
     "expression_statement": {
       "type": "CHOICE",

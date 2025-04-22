@@ -105,8 +105,8 @@ module.exports = grammar({
         '}'
       ),
 
-    _function_declaration_parameter: $ =>
-      field('parameter', choice($.identifier, $.inlet_outlet)),
+    // _function_declaration_parameter: $ =>
+    //   field('parameter', choice($.identifier, $.inlet_outlet)),
 
     function_declaration_body: $ =>
       seq(
@@ -114,16 +114,15 @@ module.exports = grammar({
         field('statements', $.expr_statement_list),
       ),
 
-    // Can we declare expressions in parameters ?? (test says no)
-    //_function_declaration_parameter: $ =>
-    //  choice(
-    //    seq(
-    //      field('key', $.identifier),
-    //      '=',
-    //      field('value', $._true_expression)
-    //    ),
-    //    choice(field('value', $.identifier), $.inlet_outlet)
-    //  ),
+    _function_declaration_parameter: $ =>
+     choice(
+       seq(
+         field('parameter', $.identifier),
+         '=',
+         field('value', $._true_expression)
+       ),
+       choice(field('parameter', $.identifier), $.inlet_outlet)
+     ),
 
     // Not using prec.left() here ?
     _declaration: $ =>
@@ -142,7 +141,6 @@ module.exports = grammar({
     // Statements
 
     _statement: $ => choice($._compound_statement, $._simple_statement),
-    //_statement: $ => field('statement', choice($.compound_statement, $._simple_statement)),
 
     _simple_statement: $ =>
       choice(
@@ -170,27 +168,7 @@ module.exports = grammar({
         $.return_statement
       ),
 
-    //_expr_statement_list: $ =>
-    //  field(
-    //    'statement',
-    //    choice(
-    //      seq(
-    //        repeat1(
-    //          choice(
-    //            $.compound_statement,
-    //            $.expression_statement,
-    //            $.selection_statement,
-    //            $.iteration_statement
-    //          )
-    //        ),
-    //        optional($.jump_statement)
-    //      ),
-    //      $.return_statement
-    //    )),
-
     _expression_statement_content: $ => $._expression,
-
-    _semicolon: _ => ';',
 
     // Bit weird but seems to work
     expression_statement: $ =>
